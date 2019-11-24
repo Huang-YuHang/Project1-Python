@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <style>
+        body{
+            width: 960px;
+            margin: 10px auto;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>学院信息</h1>
+    <hr>
+    {%  for college in colleges %}
+    <div>
+    <h3>
+        <a href="/details/?collid={{ college.id }}">{{ college.name }}</a>
+    </h3>
+        <p>{{ college.intro }}</p>
+    </div>
+    {%endfor%}
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学院详情</title>
+    <style>
+        body {
+            width: 960px;
+            margin: 10px auto;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        td, th {
+            width: 190px;
+            border: 1px solid black;
+            text-align: center;
+        }
+        body>h2{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ college.name }}:详情信息</h1>
+    <hr>
+    <h2>学生信息</h2>
+    <hr>
+    <table>
+        <tr>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>出生日期</th>
+            <th>家庭住址</th>
+            <th>操作</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.sex | yesno:'男,女' }}</td>
+            <td>{{ student.birth }}</td>
+            <td>{{ student.addr }}</td>
+            <td>
+                <a href="">删除</a>
+                <a href="">更新</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>老师信息</h2>
+    <hr>
+    <table>
+        <tr>
+            <th>姓名</th>
+            <th>职称</th>
+        </tr>
+        {% for teacher in teachers %}
+        <tr>
+            <td>{{ teacher.name }}</td>
+            <td>{{ teacher.title }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
