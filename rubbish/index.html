@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>垃圾分类</title>
+    <style>
+        #container {
+            width: 520px;
+            margin: 60px auto;
+        }
+        #container>input {
+            width: 400px;
+            height: 40px;
+            font: 28px/40px "Arial";
+            text-align: center;
+            border: none;
+            outline: none;
+            border-bottom: 1px dashed darkgray;
+            vertical-align: bottom;
+        }
+        #ok {
+            width: 80px;
+            height: 40px;
+            font: 28px/40px "Arial";
+            background-color: red;
+            color: white;
+            border: none;
+            outline: none;
+            margin-left: 20px;
+        }
+        p>img {
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+        p>div {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <input type="text" name="keyword">
+        <button id="ok">确定</button>
+        <hr>
+        <div id="results">
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        const imageNames = ['recyclable.png', 'harmful-waste.png', 'kitchen-waste.png', 'other-waste.png']
+        $('#ok').on('click', (evt) => {
+            let keyword = $('#container>input').val().trim()
+            let url = 'http://api.tianapi.com/txapi/lajifenlei/index?key=9aeb28ee8858a167c1755f856f830e22&word=' 
+                + encodeURIComponent(keyword)
+            $.getJSON(url, (json) => {
+                $('#results').empty()
+                if (json.code == 200) {
+                    let items = json.newslist
+                    for (let i = 0; i < items.length; i++) {
+                        let rubbish = items[i]
+                        $('#results').append(
+                            $('<p>')
+                                .append($('<img>').attr('height', '32').attr('src', 'images/' + imageNames[rubbish.type]))
+                                .append($('<strong>').text(rubbish.name))
+                                .append($('<div>').text(rubbish.tip))
+                        )
+                    }
+                } else {
+                    $('#results').append(
+                        $('<h3>').text('抱歉, 没有对应的查询结果.')
+                    )
+                }
+            })  
+        })
+    </script>
+</body>
+</html>
