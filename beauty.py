@@ -3,7 +3,7 @@ import uuid
 import json
 from threading import Thread
 def get_beauty_info(page):
-    key = "93f189f2263647f3ac135d46505bf53b"
+    key = "***"##您自己的key
     resp = requests.get(
         url=f"http://api.tianapi.com/meinv/index?key={key}&num=10&page={page}")
     data = json.loads(resp.text)
