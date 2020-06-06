@@ -1,4 +1,4 @@
-Django==2.1.14
+Django==2.2.13
 djangorestframework==3.10.3
 dlib==19.14.0
 PyMySQL==0.9.3
